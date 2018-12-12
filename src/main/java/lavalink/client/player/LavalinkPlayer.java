@@ -26,6 +26,8 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import lavalink.client.LavalinkUtil;
 import lavalink.client.io.LavalinkSocket;
 import lavalink.client.io.Link;
+import lavalink.client.player.equalizer.Equalizer;
+import lavalink.client.player.equalizer.EqualizerImpl;
 import lavalink.client.player.event.IPlayerEventListener;
 import lavalink.client.player.event.PlayerEvent;
 import lavalink.client.player.event.PlayerPauseEvent;
@@ -44,7 +46,7 @@ public class LavalinkPlayer implements IPlayer {
     private int volume = 100;
     private long updateTime = -1;
     private long position = -1;
-
+    private final Equalizer equalizer;
     private final Link link;
     private List<IPlayerEventListener> listeners = new CopyOnWriteArrayList<>();
 
@@ -55,6 +57,7 @@ public class LavalinkPlayer implements IPlayer {
      */
     public LavalinkPlayer(Link link) {
         this.link = link;
+        this.equalizer = new EqualizerImpl(link);
         addListener(new LavalinkInternalPlayerEventHandler());
     }
 
@@ -217,4 +220,8 @@ public class LavalinkPlayer implements IPlayer {
         return link;
     }
 
+    @Override
+    public Equalizer getEqualizer() {
+        return equalizer;
+    }
 }
