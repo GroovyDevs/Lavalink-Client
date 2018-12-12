@@ -23,6 +23,7 @@
 package lavalink.client.player;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import lavalink.client.player.equalizer.Equalizer;
 import lavalink.client.player.event.IPlayerEventListener;
 
 public interface IPlayer {
@@ -48,5 +49,7 @@ public interface IPlayer {
     void addListener(IPlayerEventListener listener);
 
     void removeListener(IPlayerEventListener listener);
+
+    Equalizer getEqualizer();
 
 }
